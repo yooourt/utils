@@ -37,12 +37,6 @@ const isPrime = function (n) {
     return true
 }
 
-// const capitalize = function (str) {
-//     let first = str.slice(0, 1).toUpperCase()
-//     let rest = str.toLowerCase().slice(1)
-//     return first + rest
-// }
-
 // log
 const log = console.log.bind(console)
 
@@ -77,18 +71,6 @@ const onEvent = (obj) => {
         obj.callback,
     )
 }
-
-// const classifyActions = (element, eventName, pairs=[]) => {
-//     const action = (event) => {
-//         const self = event.target
-//         for (let [selector, callback] of pairs) {
-//             if (self.matches(selector)) {
-//                 callback.call(self, event)
-//             }
-//         }
-//     }
-//     element.addEventListener(eventName, action)
-// }
 
 const ajax = function(request) {
     var r = new XMLHttpRequest()

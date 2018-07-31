@@ -37,11 +37,44 @@ const isPrime = function (n) {
     return true
 }
 
+const product = (arr1, arr2) => {
+    let list = []
+    for (let i = 0; i < arr1.length; i += 1) {
+        for (let j = 0; j < arr2.length; j += 1) {
+            list.push([arr1[i], arr2[j]])
+        }
+    }
+    return list
+}
+
+const inOrder = () => {
+    const observers = []
+    const apply = (funcs, ...args) => {
+        funcs.forEach(func => func(...args))
+    }
+    let _promise = Promise.resolve()
+
+    return {
+        subscribe(func) {
+            observers.push(func)
+        },
+        next(value) {
+            _promise =
+                _promise.then(() => {
+                    return value
+                })
+                .then((v) => {
+                    apply(observers, v)
+                })
+        },
+    }
+}
+
 // log
 const log = console.log.bind(console)
 
 const tog = (...args) => {
-    log(`[at time ${Date.now() / 1000}]:\n`, ...args)
+    log(`[${Date.now() / 1000}]:\n`, ...args)
 }
 
 // DOM
@@ -53,17 +86,17 @@ const appendHtml = (element, html) => {
     element.insertAdjacentHTML('beforeend', html)
 }
 
-const _onEvent = (element, selector, eventName, callback) => {
-    const action = (event) => {
-        const self = event.target
-        if (self.matches(selector)) {
-            callback.call(self, event)
-        }
-    }
-    element.addEventListener(eventName, action)
-}
-
 const onEvent = (obj) => {
+    const _onEvent = (element, selector, eventName, callback) => {
+        const action = (event) => {
+            const self = event.target
+            if (self.matches(selector)) {
+                callback.call(self, event)
+            }
+        }
+        element.addEventListener(eventName, action)
+    }
+
     _onEvent(
         obj.element,
         obj.selector,
@@ -96,14 +129,4 @@ const _get = (object, path, defaultValue) => {
         obj = obj[propety]
     }
     return obj
-}
-
-const product = (arr1, arr2) => {
-    let list = []
-    for (let i = 0; i < arr1.length; i += 1) {
-        for (let j = 0; j < arr2.length; j += 1) {
-            list.push([arr1[i], arr2[j]])
-        }
-    }
-    return list
 }

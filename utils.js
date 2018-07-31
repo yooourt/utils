@@ -13,11 +13,13 @@ const randomInt = function (min, max) {
 
 const shuffle = (array) => {
     let i = array.length -1
-    for (; i > 0; i -= 1) {
+    while (i > 0) {
         let j = randomInt(0, i+1)
         let t = array[i]
         array[i] = array[j]
         array[j] = t
+
+        i -= 1
     }
     return array
 }

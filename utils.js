@@ -1,4 +1,4 @@
-const circle = function (array, index) {
+const circle = (array, index) => {
     let len = array.length
     let i = index % len
     if (i < 0) {
@@ -7,7 +7,7 @@ const circle = function (array, index) {
     return array[i]
 }
 
-const randomInt = function (min, max) {
+const randomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min)) + min
 }
 
@@ -24,7 +24,7 @@ const shuffle = (array) => {
     return array
 }
 
-const isPrime = function (n) {
+const isPrime = (n) => {
     if (n <= 1) {
         return false
     }

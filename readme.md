@@ -1,5 +1,5 @@
 [rawgit](https://rawgit.com/)
 
 ``` html
-<script src="https://rawgit.com/TwT-BoJi/utils/master/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/TwT-BoJi/utils/utils.js"></script>
 ```

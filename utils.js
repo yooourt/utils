@@ -39,45 +39,31 @@ const isPrime = (n) => {
     return true
 }
 
-const product = (arr1, arr2) => {
-    let list = []
-    for (let i = 0; i < arr1.length; i += 1) {
-        for (let j = 0; j < arr2.length; j += 1) {
-            list.push([arr1[i], arr2[j]])
-        }
-    }
-    return list
-}
+// const inOrder = () => {
+//     const observers = []
+//     const apply = (funcs, ...args) => {
+//         funcs.forEach(func => func(...args))
+//     }
+//     let _promise = Promise.resolve()
 
-const inOrder = () => {
-    const observers = []
-    const apply = (funcs, ...args) => {
-        funcs.forEach(func => func(...args))
-    }
-    let _promise = Promise.resolve()
-
-    return {
-        subscribe(func) {
-            observers.push(func)
-        },
-        next(value) {
-            _promise =
-                _promise.then(() => {
-                    return value
-                })
-                .then((v) => {
-                    apply(observers, v)
-                })
-        },
-    }
-}
+//     return {
+//         subscribe(func) {
+//             observers.push(func)
+//         },
+//         next(value) {
+//             _promise =
+//                 _promise.then(() => {
+//                     return value
+//                 })
+//                 .then((v) => {
+//                     apply(observers, v)
+//                 })
+//         },
+//     }
+// }
 
 // log
 const log = console.log.bind(console)
-
-const tog = (...args) => {
-    log(`[${Date.now() / 1000}]:\n`, ...args)
-}
 
 // DOM
 const e = (selector) => {
@@ -120,15 +106,4 @@ const ajax = function(request) {
     }
 
     r.send(request.data)
-}
-
-const _get = (object, path, defaultValue) => {
-    let obj = object
-    for (let propety of path.split('.')) {
-        if (obj[propety] === undefined) {
-            return defaultValue
-        }
-        obj = obj[propety]
-    }
-    return obj
 }

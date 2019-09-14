@@ -1,0 +1,52 @@
+<div>
+  <input id="input" type="text">
+  <div id="hint">search keywords</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+  const createPromiseSwitch = () => {
+    let resolveLast = () => {}
+
+    const switch_ = (promise) => {
+      resolveLast()
+
+      const token = {}
+      const racer = new Promise((resolve) => {
+        resolveLast = () => resolve(token)
+      })
+      const never = new Promise(() => {})
+
+      return Promise.race([promise, racer]).then((value) => {
+        return value === token ? never : value
+      })
+    }
+
+    return switch_
+  }
+
+  ///// test
+  const getSearchResult = (keywords) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(`${keywords}`)
+      }, 500)
+    })
+  }
+
+  const main = () => {
+    const switchPromise = createPromiseSwitch()
+
+    $('#input').on('input', (event) => {
+      const keywords = event.target.value
+
+      $('#hint').html('searching...')
+      switchPromise(getSearchResult(keywords)).then((response) => {
+        $('#hint').html(`search result = ${response}`)
+      })
+    })
+  }
+
+  main()
+</script>
+

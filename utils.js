@@ -1,9 +1,14 @@
-const circle = (array, index) => {
-    let len = array.length
-    let i = index % len
+const circleIndex = (array, index) => {
+    let s = array.length
+    let i = index % s
     if (i < 0) {
-        i += len
+        i += s
     }
+    return i
+}
+
+const circle = (array, index) => {
+    let i = circleIndex(array, index)
     return array[i]
 }
 
